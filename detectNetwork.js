@@ -24,6 +24,10 @@ var detectNetwork = function(cardNumber) {
     return 'Visa';
   }  else if ((firstTwo >= 51 && firstTwo <= 55) && cardLength === 16) {
     return 'MasterCard';
+  } else if ((firstTwo === 65 || firstFour === 6011 || (firstThree >= 644 && firstThree <= 649)) && (cardLength === 16 || cardLength === 19)) {
+    return 'Discover';
+  } else if ((firstFour === 5018 || firstFour === 5020 || firstFour === 5038 || firstFour === 6304) && (cardLength >=12 && cardLength <= 19)) {
+    return 'Maestro';
   }
   // Once you've read this, go ahead and try to implement this function, then return to the console.
 };
