@@ -149,6 +149,21 @@ describe('Discover', function() {
   it('has a prefix of 6011 and a length of 19', function() {
     assert(detectNetwork('6011123412341234123') === 'Discover')
   });
+  var assert = chai.assert;
+  it('has a prefix of 65 and a length of 16', function() {
+    assert(detectNetwork('6511123412341234') === 'Discover')
+  });
+  it('has a prefix of 65 and a length of 19', function() {
+    assert(detectNetwork('6511123412341234123') === 'Discover')
+  });
+  for (var prefix = 644; prefix <= 649; prefix++) {
+      it('has a prefix of ' + prefix + ' and a length of 16', function() {
+        assert(detectNetwork(prefix + '1123412341234') === 'Discover')
+      });
+      it('has a prefix of ' + prefix + ' and a length of 19', function () {
+        assert(detectNetwork(prefix + '1123412341234123') === 'Discover')
+      });
+  }
 });
 
 describe('Maestro', function() {
