@@ -225,3 +225,30 @@ describe('Maestro', function() {
   }
 });
 
+describe('China UnionPay', function () {
+  var expect = chai.expect;
+  var chinaUnionPayPrefix = [];
+  for (var i = 622126; i <= 622925; i++) {
+    chinaUnionPayPrefix.push(i);
+  }
+  for (var i = 624; i <= 626; i++) {
+    chinaUnionPayPrefix.push(i);
+  }
+  for (var i = 6282; i <= 6288; i++) {
+    chinaUnionPayPrefix.push(i);
+  }
+  var chinaUnionPayLength = [16, 17, 18, 19];
+  for (var i = 0; i < chinaUnionPayPrefix.length; i++) {
+    var prefix = chinaUnionPayPrefix[i].toString();
+    for (var j = 0; j < chinaUnionPayLength.length; j++) {
+      var cardLength = chinaUnionPayLength[j];
+      var additionalNumbers = '1'.repeat(cardLength - prefix.length);
+      var cardNumber = prefix + additionalNumbers;
+      (function (cardNumber) {
+        it('has a prefix of ' + prefix + ' and a length of ' + cardLength, function () {
+          expect(detectNetwork(cardNumber)).to.equal('China UnionPay')
+        })
+      })(cardNumber);
+    }
+  }
+})
