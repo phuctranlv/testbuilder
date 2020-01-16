@@ -252,3 +252,22 @@ describe('China UnionPay', function () {
     }
   }
 })
+
+describe('Switch', function() {
+  var expect = chai.expect;
+  var switchPrefix = [4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759];
+  var switchLength = [16, 18, 19];
+  for (var i = 0; i < switchPrefix.length; i++) {
+    var prefix = switchPrefix[i].toString();
+    for (var j = 0; j < switchLength.length; j++) {
+      var cardLength = switchLength[j];
+      var additionalNumbers = '1'.repeat(cardLength - prefix.length);
+      var cardNumber = prefix + additionalNumbers;
+      (function (cardNumber) {
+        it('has a prefix of ' + prefix + ' and a length of ' + cardLength, function () {
+          expect(detectNetwork(cardNumber)).to.equal('Switch')
+        })
+      })(cardNumber);
+    }
+  }
+})
