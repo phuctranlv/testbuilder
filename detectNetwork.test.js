@@ -153,5 +153,12 @@ describe('Discover', function() {
 
 describe('Maestro', function() {
   // Write full test coverage for the Maestro card
+  var expect = chai.expect;
+  it('has a prefix of 5038 and a length of 12', function() {
+    expect(detectNetwork('503812341234')).to.equal('Maestro');
+  });
+  it('has a prefix of 5018 and a length of 19', function() {
+    expect(detectNetwork('5018123412341234123')).to.equal('Maestro');
+  })
 });
 
