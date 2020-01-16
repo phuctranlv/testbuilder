@@ -157,12 +157,18 @@ describe('Discover', function() {
     assert(detectNetwork('6511123412341234123') === 'Discover')
   });
   for (var prefix = 644; prefix <= 649; prefix++) {
-      it('has a prefix of ' + prefix + ' and a length of 16', function() {
-        assert(detectNetwork(prefix + '1123412341234') === 'Discover')
-      });
-      it('has a prefix of ' + prefix + ' and a length of 19', function () {
-        assert(detectNetwork(prefix + '1123412341234123') === 'Discover')
-      });
+      var prefixString = prefix.toString();
+      var cardNumber16 = prefixString + '1123412341234';
+      var cardNumber19 = prefixString + '1123412341234123';
+      (function (prefixString, cardNumber16, cardNumber19) {
+        it('has a prefix of ' + prefixString + ' and a length of 16', function() {
+          assert(detectNetwork(cardNumber16) === 'Discover')
+        });
+        it('has a prefix of ' + prefixString + ' and a length of 19', function () {
+          assert(detectNetwork(cardNumber19) === 'Discover')
+        });
+      })(prefixString, cardNumber16, cardNumber19);
+
   }
 });
 
@@ -174,36 +180,48 @@ describe('Maestro', function() {
     for (var i = 2; i <= cardLength - 4; i++) {
       additionalNumbers += '1';
     }
-    it('has a prefix of 5018 and a length of ' + cardLength, function() {
-      expect(detectNetwork('5018' + additionalNumbers)).to.equal('Maestro');
-    })
+    var cardNumber = 5018 + additionalNumbers;
+    (function (cardNumber) {
+      it('has a prefix of 5018 and a length of ' + cardLength, function() {
+        expect(detectNetwork(cardNumber)).to.equal('Maestro');
+      })
+    })(cardNumber);
   }
   for (var cardLength = 12; cardLength <= 19; cardLength++) {
     var additionalNumbers = '1';
     for (var i = 2; i <= cardLength - 4; i++) {
       additionalNumbers += '1';
     }
-    it('has a prefix of 5020 and a length of ' + cardLength, function() {
-      expect(detectNetwork('5020' + additionalNumbers)).to.equal('Maestro');
-    })
+    var cardNumber = 5020 + additionalNumbers;
+    (function (cardNumber) {
+      it('has a prefix of 5020 and a length of ' + cardLength, function() {
+        expect(detectNetwork(cardNumber)).to.equal('Maestro');
+      })
+    })(cardNumber);
   }
   for (var cardLength = 12; cardLength <= 19; cardLength++) {
     var additionalNumbers = '1';
     for (var i = 2; i <= cardLength - 4; i++) {
       additionalNumbers += '1';
     }
-    it('has a prefix of 5038 and a length of ' + cardLength, function() {
-      expect(detectNetwork('5038' + additionalNumbers)).to.equal('Maestro');
-    })
+    var cardNumber = 5038 + additionalNumbers;
+    (function (cardNumber) {
+      it('has a prefix of 5038 and a length of ' + cardLength, function() {
+        expect(detectNetwork(cardNumber)).to.equal('Maestro');
+      })
+    })(cardNumber);
   }
   for (var cardLength = 12; cardLength <= 19; cardLength++) {
     var additionalNumbers = '1';
     for (var i = 2; i <= cardLength - 4; i++) {
       additionalNumbers += '1';
     }
-    it('has a prefix of 6304 and a length of ' + cardLength, function() {
-      expect(detectNetwork('6304' + additionalNumbers)).to.equal('Maestro');
-    })
+    var cardNumber = 6304 + additionalNumbers;
+    (function (cardNumber) {
+      it('has a prefix of 6304 and a length of ' + cardLength, function() {
+        expect(detectNetwork(cardNumber)).to.equal('Maestro');
+      })
+    })(cardNumber);
   }
 });
 
