@@ -52,8 +52,8 @@ describe('Diner\'s Club', function() {
     }
   });
 
-  it('has a prefix of 39 and a length of 13', function() {
-    if (detectNetwork('3934567890123') === 'Diner\'s Club') {
+  it('has a prefix of 39 and a length of 14', function() {
+    if (detectNetwork('39345678901234') !== 'Diner\'s Club') {
       throw new Error('Test failed');
     }
 
@@ -169,11 +169,41 @@ describe('Discover', function() {
 describe('Maestro', function() {
   // Write full test coverage for the Maestro card
   var expect = chai.expect;
-  it('has a prefix of 5038 and a length of 12', function() {
-    expect(detectNetwork('503812341234')).to.equal('Maestro');
-  });
-  it('has a prefix of 5018 and a length of 19', function() {
-    expect(detectNetwork('5018123412341234123')).to.equal('Maestro');
-  })
+  for (var cardLength = 12; cardLength <= 19; cardLength++) {
+    var additionalNumbers = '1';
+    for (var i = 2; i <= cardLength - 4; i++) {
+      additionalNumbers += '1';
+    }
+    it('has a prefix of 5018 and a length of ' + cardLength, function() {
+      expect(detectNetwork('5018' + additionalNumbers)).to.equal('Maestro');
+    })
+  }
+  for (var cardLength = 12; cardLength <= 19; cardLength++) {
+    var additionalNumbers = '1';
+    for (var i = 2; i <= cardLength - 4; i++) {
+      additionalNumbers += '1';
+    }
+    it('has a prefix of 5020 and a length of ' + cardLength, function() {
+      expect(detectNetwork('5020' + additionalNumbers)).to.equal('Maestro');
+    })
+  }
+  for (var cardLength = 12; cardLength <= 19; cardLength++) {
+    var additionalNumbers = '1';
+    for (var i = 2; i <= cardLength - 4; i++) {
+      additionalNumbers += '1';
+    }
+    it('has a prefix of 5038 and a length of ' + cardLength, function() {
+      expect(detectNetwork('5038' + additionalNumbers)).to.equal('Maestro');
+    })
+  }
+  for (var cardLength = 12; cardLength <= 19; cardLength++) {
+    var additionalNumbers = '1';
+    for (var i = 2; i <= cardLength - 4; i++) {
+      additionalNumbers += '1';
+    }
+    it('has a prefix of 6304 and a length of ' + cardLength, function() {
+      expect(detectNetwork('6304' + additionalNumbers)).to.equal('Maestro');
+    })
+  }
 });
 
